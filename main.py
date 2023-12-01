@@ -1,27 +1,7 @@
 import sys
-import json
 
+from logs import Logs
 
-class Logs():
-    def __init__(self) -> None:
-        self.logs = []
-        self.moves = 0
-
-    def log_move(self, player, row, column):
-        move_info = {
-            'moves' : self.moves,
-            'player' : player,
-            'row ' : row,
-            'column' : column
-        }
-        self.moves += 1
-        self.logs.append(move_info)
-
-
-
-    def download_logs(self):
-        with open('logs.json', 'w') as json_file:
-            json.dump(self.logs, json_file, indent = 4)
 
 
 class Game():
@@ -62,7 +42,7 @@ class Game():
             print(f'There is {self.board[self.row][self.column]}')
             return
         player = 'X' if self.turn else 'O'
-        self.logs.log_move(player, self.row, self.column)
+        self.logs.log_move(player, self.row, self.column, self.board)
 
         if self.turn == True:
             self.turn = False

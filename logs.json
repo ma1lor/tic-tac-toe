@@ -1,44 +1,177 @@
 [
     {
-        "moves": 0,
+        "move_number": 0,
         "player": "X",
-        "row ": 0,
-        "column": 0
+        "move": [
+            0,
+            0
+        ],
+        "game_state": [
+            [
+                "X",
+                "O",
+                "X"
+            ],
+            [
+                "O",
+                "X",
+                "O"
+            ],
+            [
+                "X",
+                "*",
+                "*"
+            ]
+        ]
     },
     {
-        "moves": 1,
+        "move_number": 1,
         "player": "O",
-        "row ": 0,
-        "column": 1
+        "move": [
+            0,
+            1
+        ],
+        "game_state": [
+            [
+                "X",
+                "O",
+                "X"
+            ],
+            [
+                "O",
+                "X",
+                "O"
+            ],
+            [
+                "X",
+                "*",
+                "*"
+            ]
+        ]
     },
     {
-        "moves": 2,
+        "move_number": 2,
         "player": "X",
-        "row ": 0,
-        "column": 2
+        "move": [
+            0,
+            2
+        ],
+        "game_state": [
+            [
+                "X",
+                "O",
+                "X"
+            ],
+            [
+                "O",
+                "X",
+                "O"
+            ],
+            [
+                "X",
+                "*",
+                "*"
+            ]
+        ]
     },
     {
-        "moves": 3,
+        "move_number": 3,
         "player": "O",
-        "row ": 1,
-        "column": 0
+        "move": [
+            1,
+            0
+        ],
+        "game_state": [
+            [
+                "X",
+                "O",
+                "X"
+            ],
+            [
+                "O",
+                "X",
+                "O"
+            ],
+            [
+                "X",
+                "*",
+                "*"
+            ]
+        ]
     },
     {
-        "moves": 4,
+        "move_number": 4,
         "player": "X",
-        "row ": 1,
-        "column": 1
+        "move": [
+            1,
+            1
+        ],
+        "game_state": [
+            [
+                "X",
+                "O",
+                "X"
+            ],
+            [
+                "O",
+                "X",
+                "O"
+            ],
+            [
+                "X",
+                "*",
+                "*"
+            ]
+        ]
     },
     {
-        "moves": 5,
+        "move_number": 5,
         "player": "O",
-        "row ": 1,
-        "column": 2
+        "move": [
+            1,
+            2
+        ],
+        "game_state": [
+            [
+                "X",
+                "O",
+                "X"
+            ],
+            [
+                "O",
+                "X",
+                "O"
+            ],
+            [
+                "X",
+                "*",
+                "*"
+            ]
+        ]
     },
     {
-        "moves": 6,
+        "move_number": 6,
         "player": "X",
-        "row ": 2,
-        "column": 0
+        "move": [
+            2,
+            0
+        ],
+        "game_state": [
+            [
+                "X",
+                "O",
+                "X"
+            ],
+            [
+                "O",
+                "X",
+                "O"
+            ],
+            [
+                "X",
+                "*",
+                "*"
+            ]
+        ]
     }
 ]
