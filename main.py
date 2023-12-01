@@ -1,133 +1,178 @@
+import pygame
 import sys
+from main_class import Game
 
-from logs import Logs
+pygame.init()
 
-
-
-class Game():
-    def __init__(self):
-        self.board = [
-            ['*', '*', '*'],
-            ['*', '*', '*'],
-            ['*', '*', '*']
-        ]
-        self.turn = True
-        self.logs = Logs()
-        
-    def __str__(self):
-        return str(self.board)
+width, height = 800, 600
+screen = pygame.display.set_mode((width, height))
+pygame.display.set_caption("Tic Tac Toe")
 
 
-    def make_move(self, move):
-        if self.turn == True:
-            self.figure = 'X'
-        else:
-            self.figure = 'O'
-        self.move = move
-        
-        if self.move < 4:
-            self.row = 0
-            self.column = self.move - 1 
-        elif self.move < 7:
-            self.row = 1
-            self.column = self.move - 4
-        else:
-            self.row = 2
-            self.column = self.move - 7
-
-        
-        if self.board[self.row][self.column] == '*':
-            self.board[self.row][self.column] = self.figure
-        else: 
-            print(f'There is {self.board[self.row][self.column]}')
-            return
-        player = 'X' if self.turn else 'O'
-        self.logs.log_move(player, self.row, self.column, self.board)
-
-        if self.turn == True:
-            self.turn = False
-        else:
-            self.turn = True
+#downloading all images
+image_x = pygame.image.load('image_x.png')
+image_o = pygame.image.load('image_o.png')
+background_image = pygame.image.load("background.png")
 
 
-    def check(self):
-        for i in range(3):
-            
-            if self.board[i][0] == self.board[i][1] == self.board[i][2] != '*':
-                self.declare_winner(self.board[i][0])
+#transforming to normal size
+transformed_image_x = pygame.transform.scale(image_x, (100, 100))
+transformed_image_o = pygame.transform.scale(image_o, (100, 100))
 
-            
-            if self.board[0][i] == self.board[1][i] == self.board[2][i] != '*':
-                self.declare_winner(self.board[0][i])
 
-        
-        if (self.board[0][0] == self.board[1][1] == self.board[2][2] != '*') or \
-        (self.board[0][2] == self.board[1][1] == self.board[2][0] != '*'):
-            self.declare_winner(self.board[1][1])
-        
+# for game itself
+line_width = 8
+line_length = 200
 
-        self.check_draw()
+# vertical lines
+vertical_line_left_start = (325, 100)
+vertical_line_left_end = (325, 500)
+
+vertical_line_right_start = (475, 100)
+vertical_line_right_end = (475, 500)
+
+#horizontal lines
+horizontal_line_top_start = (200, 225)
+horizontal_line_top_end = (600, 225)
+
+horizontal_line_bottom_start = (200, 375)
+horizontal_line_bottom_end = (600, 375)
+
+
+# colours
+black = (0, 0, 0)
+white = (255, 255, 255)
+gray = (200, 200, 200)
+
+# buttons
+button_width, button_height = 200, 50
+button_x, button_y = (width - button_width) // 2, (height - button_height) // 2
+
+# text
+font = pygame.font.SysFont('microsofttaile', 36)
+title_font = pygame.font.SysFont('microsofttaile', 72)
+button_text = font.render("Начать игру", True, black)
+title_text = title_font.render("Tic Tac Toe", True, black)
+title_rect = title_text.get_rect(center=(width // 2, 150))
 
 
 
-    def check_draw(self):
 
-        draw = True
-        for i in range(3):
-            for j in range(3):
-                if self.board[i][j] == 'X' or self.board[i][j] == 'O':
-                    pass
-                else:
-                    draw = False
 
-        if draw == True:
-            self.logs.download_logs()
-            print("It's draw!")
+
+
+
+
+
+
+
+game = Game()
+game_run = False
+
+
+
+
+
+
+def get_coords(mouse_x, mouse_y):
+    square1 = [(200, 100), (325, 225)]
+    square2 = [(325, 100), (475, 225)]
+    square3 = [(475, 100), (600, 225)]
+
+    square4 = [(200, 225), (325, 375)]
+    square5 = [(325, 225), (475, 375)]
+    square6 = [(475, 225), (600, 375)]
+
+    square7 = [(200, 375), (325, 500)]
+    square8 = [(325, 375), (475, 500)]
+    square9 = [(475, 375), (600, 500)]
+    
+    for index, square in enumerate([square1, square2, square3, square4, square5, square6, square7, square8, square9], start=1):
+        if square[0][0] < mouse_x < square[1][0] and square[0][1] < mouse_y < square[1][1]:
+            game.make_move(index)
+
+
+
+
+
+
+def draw_board(board):
+
+    x = 0
+    y = 0
+    for row in range(3):
+        for col in range(3):
+            x = 205 + (145 * (col))
+            y = 105 + (145 * (row))
+
+            symbol = board[row][col]
+            if symbol == 'X':
+                screen.blit(transformed_image_x, (x, y))
+            elif symbol == 'O':
+                screen.blit(transformed_image_o, (x, y))
+
+
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
             sys.exit()
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_x, mouse_y = pygame.mouse.get_pos()
 
-                
-                
+            if game_run:
+                get_coords(mouse_x, mouse_y)
+            elif button_x < mouse_x < button_x + button_width and button_y < mouse_y < button_y + button_height:
+                game_run = True
+
+
+    screen.blit(background_image, (0, 0))
+
+    if not game_run:
+        pygame.draw.rect(screen, gray, (width // 2 - 220, 105, 440, 80))
+        pygame.draw.rect(screen, black, (width // 2 - 220, 105, 440, 80), 2)
+
+        screen.blit(title_text, title_rect)
+
+        pygame.draw.rect(screen, gray, (button_x, button_y, button_width, button_height))
+        pygame.draw.rect(screen, black, (button_x, button_y, button_width, button_height), 2)
+        screen.blit(button_text, ((width - button_width) // 2 + 30, (height - button_height) // 2 + 15))
+    else:
+        screen.fill(black)
+        pygame.draw.line(screen, white, vertical_line_left_start, vertical_line_left_end, line_width)
+        pygame.draw.line(screen, white, vertical_line_right_start, vertical_line_right_end, line_width)
+        pygame.draw.line(screen, white, horizontal_line_top_start, horizontal_line_top_end, line_width)
+        pygame.draw.line(screen, white, horizontal_line_bottom_start, horizontal_line_bottom_end, line_width)
+        draw_board(board=game.return_board())
+
+    winner = game.check()
+    if winner == 'O' or winner == 'X':
+        victory_surface = pygame.Surface((200, 75))
+        victory_surface.fill(black)
+        victory_text = font.render(f"Player {winner} wins!", True, white)
+
+        victory_rect = victory_text.get_rect(center=(victory_surface.get_width() // 2, victory_surface.get_height() // 2))
+
+        screen.blit(background_image, (0, 0))
+
+
+        victory_surface.blit(victory_text, victory_rect)
+
+        screen.blit(victory_surface, ((width - victory_surface.get_width()) // 2, (height - victory_surface.get_height()) // 2))
+    elif winner == "It's draw!":
+        victory_surface = pygame.Surface((200, 75))
+        victory_surface.fill(black)
+        victory_text = font.render(f"It's a draw!", True, white)
+
+        victory_rect = victory_text.get_rect(center=(victory_surface.get_width() // 2, victory_surface.get_height() // 2))
+
+        screen.blit(background_image, (0, 0))
+
+
+        victory_surface.blit(victory_text, victory_rect)
+
+        screen.blit(victory_surface, ((width - victory_surface.get_width()) // 2, (height - victory_surface.get_height()) // 2))
         
 
 
-
-    def declare_winner(self, winner):
-        self.logs.download_logs()
-
-        if winner == 'O':
-            print('O is the winner!')
-        elif winner == 'X':
-            print('X is the winner!')
-        sys.exit()
-
-
-    def show(self):
-
-        print('\n'.join([' | ' + ' | '.join(row) + ' | ' for row in self.board]))   
-        self.check()  
-        
-
-
-         
-        
-        
-
-
-
-
-def main():
-    game = Game()
-
-    print('WELCOME TO THE TIC TAC TOE')
-    game.show() 
-    i = 0
-    while i < 8:
-
-        move = int(input('Input ur number: '))
-        game.make_move(move)
-        game.show()
-
-
-
-if __name__ == '__main__':
-    main()
+    pygame.display.flip()
