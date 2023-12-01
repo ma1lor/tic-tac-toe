@@ -1,0 +1,44 @@
+[
+    {
+        "moves": 0,
+        "player": "X",
+        "row ": 0,
+        "column": 0
+    },
+    {
+        "moves": 1,
+        "player": "O",
+        "row ": 0,
+        "column": 1
+    },
+    {
+        "moves": 2,
+        "player": "X",
+        "row ": 0,
+        "column": 2
+    },
+    {
+        "moves": 3,
+        "player": "O",
+        "row ": 1,
+        "column": 0
+    },
+    {
+        "moves": 4,
+        "player": "X",
+        "row ": 1,
+        "column": 1
+    },
+    {
+        "moves": 5,
+        "player": "O",
+        "row ": 1,
+        "column": 2
+    },
+    {
+        "moves": 6,
+        "player": "X",
+        "row ": 2,
+        "column": 0
+    }
+]
