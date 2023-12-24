@@ -45,13 +45,13 @@ white = (255, 255, 255)
 gray = (200, 200, 200)
 
 # buttons
-button_width, button_height = 200, 50
+button_width, button_height = 300, 70
 button_x, button_y = (width - button_width) // 2, (height - button_height) // 2
 
 # text
 font = pygame.font.SysFont('microsofttaile', 36)
 title_font = pygame.font.SysFont('microsofttaile', 72)
-button_text = font.render("Начать игру", True, black)
+button_text = font.render("Start the game", True, black)
 title_text = title_font.render("Tic Tac Toe", True, black)
 title_rect = title_text.get_rect(center=(width // 2, 150))
 
@@ -129,6 +129,7 @@ while True:
     screen.blit(background_image, (0, 0))
 
     if not game_run:
+        
         pygame.draw.rect(screen, gray, (width // 2 - 220, 105, 440, 80))
         pygame.draw.rect(screen, black, (width // 2 - 220, 105, 440, 80), 2)
 
@@ -147,7 +148,7 @@ while True:
 
     winner = game.check()
     if winner == 'O' or winner == 'X':
-        victory_surface = pygame.Surface((200, 75))
+        victory_surface = pygame.Surface((300, 75))
         victory_surface.fill(black)
         victory_text = font.render(f"Player {winner} wins!", True, white)
 
