@@ -10,9 +10,9 @@ pygame.display.set_caption("Tic Tac Toe")
 
 
 #downloading all images
-image_x = pygame.image.load('image_x.png')
-image_o = pygame.image.load('image_o.png')
-background_image = pygame.image.load("background.png")
+image_x = pygame.image.load('images/image_x.png')
+image_o = pygame.image.load('images/image_o.png')
+background_image = pygame.image.load("images/background.png")
 
 
 #transforming to normal size
